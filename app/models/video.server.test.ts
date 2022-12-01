@@ -1,11 +1,15 @@
 import { Video } from "@prisma/client";
-import { Context, MockContext } from "~/db.context.server";
+import { Context, createMockContext, MockContext } from "~/db.context.server";
 import { createVideo } from "./video.server";
 
 let mockCtx: MockContext;
 let ctx: Context;
 
 describe("video model", () => {
+    beforeEach(() => {
+        mockCtx = createMockContext();
+        ctx = mockCtx as Context
+    });
     it("should create a video item", async () => {
         const videoItem: Video = {
             id: "random id",

@@ -1,4 +1,13 @@
 import { Video } from "@prisma/client";
 import { Context } from "~/db.context.server";
 
-export const createVideo = async (videoItem: Partial<Video>, ctx: Context) => {};
+type MakeOptional<Type, Key extends keyof Type> = Omit<Type, Key> &
+  Partial<Pick<Type, Key>>;
+
+type VideoItem = MakeOptional<Video, "id">;
+
+export const createVideo = (videoItem: VideoItem, ctx: Context) => {
+    return ctx.prisma.video.create({
+        data: videoItem,
+    })
+};
