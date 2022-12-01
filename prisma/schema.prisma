@@ -13,3 +13,13 @@ model Video {
   thumbnail String
   category  String
 }
+
+model Category {
+  name  CategoryName @id @default(Exercise)
+}
+
+enum CategoryName {
+  Exercise
+  Education
+  Recipe
+}
