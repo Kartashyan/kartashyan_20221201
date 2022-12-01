@@ -11,11 +11,13 @@ model Video {
   id        String @id @default(cuid())
   title     String
   thumbnail String
-  category  String
+  categoryName  CategoryName @default(Exercise)
+  category      Category @relation(fields: [categoryName], references: [name])
 }
 
 model Category {
-  name  CategoryName @id @default(Exercise)
+  name    CategoryName @id @default(Exercise)
+  videos  Video[]
 }
 
 enum CategoryName {
