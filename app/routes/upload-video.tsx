@@ -1,8 +1,10 @@
+import { unstable_parseMultipartFormData as parseMultipartFormData } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
-import { json, redirect } from "@remix-run/server-runtime";
 import type { ActionArgs, LoaderArgs } from "@remix-run/server-runtime";
+import { json, redirect } from "@remix-run/server-runtime";
 import { UploadVideoFormFields } from "~/components/UploadVideoFormFields";
-import { getAllCategories } from "~/models/video.server";
+import { createVideo, getAllCategories } from "~/models/video.server";
+import { uploadHandler } from "~/utils/file-upload-handler.server";
 
 export async function loader({ request }: LoaderArgs) {
   const allCategories = await getAllCategories();
@@ -10,14 +12,23 @@ export async function loader({ request }: LoaderArgs) {
 }
 
 export async function action({ request }: ActionArgs) {
-  const formData = await request.formData();
-  const title = formData.get("title");
-  const category = formData.get("category");
+  const formData = await parseMultipartFormData(request, uploadHandler);
+  const title = formData.get("title") || "";
+  const category = formData.get("category") || "";
   const video = formData.get("video");
-  const thumbnail = formData.get("thumbnail");
+  const thumbnail = formData.get("thumbnail") || "";
+  const categoryName = category.toString() || "Exercise";
+  //@ts-ignore
+  const videoUrl = `videos/${video?.name}`;
+  const res = await createVideo({
+    title: title.toString(),
+    thumbnail: thumbnail.toString(),
+    //@ts-ignore
+    categoryName,
+  });
   console.log("log fields", {
     title,
-    category,
+    categoryName,
     video,
     thumbnail,
   });
@@ -26,7 +37,7 @@ export async function action({ request }: ActionArgs) {
 
 export default function UploadVideoPage() {
   const data = useLoaderData<typeof loader>();
-  
+
   return (
     <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">
       <div className="relative sm:pb-16 sm:pt-8">
