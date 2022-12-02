@@ -58,8 +58,10 @@ export const UploadVideoFormFields = ({
       <div className="pt-2 pb-2">
         <input
           id="video"
+          required
           name={fileFieldName}
           onChange={handleFileInputChange}
+          accept=".mp4, .mov"
           data-testid={fileFieldName}
           type="file"
         />

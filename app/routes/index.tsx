@@ -12,10 +12,11 @@ export async function loader({ request }: LoaderArgs) {
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
-  console.log("front log", data);
   return (
     <main className="relative flex min-h-screen flex-col bg-white sm:flex sm:items-center sm:justify-center">
-      <Link to="upload-video">Upload</Link>
+      <div className="sticky top-0 flex h-4 w-full justify-end p-10">
+        <Link to="upload-video">Upload</Link>
+      </div>
       <div className="flex flex-col gap-4">
         {data.videos.map((video) => (
           <VideoItem
