@@ -1,4 +1,9 @@
-import type { Category as CategoryType, CategoryName as CategoryNameType, Video as VideoType } from "@prisma/client";
+import type {
+  Category as CategoryType,
+  CategoryName as CategoryNameType,
+  Video as VideoType,
+} from "@prisma/client";
+
 import type { Context } from "~/db.context.server";
 import { prisma } from "~/db.server";
 

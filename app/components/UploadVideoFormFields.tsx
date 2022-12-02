@@ -17,25 +17,34 @@ export const UploadVideoFormFields = ({
 }: Props) => {
   return (
     <section>
-      <div className="flex w-full flex-col gap-1">
-        <label htmlFor="title">Title</label>
-        <input id="title" name={titleFieldName} data-testid={titleFieldName} />
+      <div>
+        <label className="flex w-full flex-col gap-1">
+          <span>Title: </span>
+          <input
+            name={titleFieldName}
+            data-testid={titleFieldName}
+            className="w-full rounded px-4 py-2 text-teal-900 shadow-xl"
+            required
+          />
+        </label>
       </div>
-      <label htmlFor="category">Choose a car:</label>
-
-      <select
-        id="category"
-        name={categoryFieldName}
-        data-testid={categoryFieldName}
-      >
-        {categoryList.map((category) => (
-          <option key={category.name} value={category.name}>
-            {category.name}
-          </option>
-        ))}
-      </select>
-      <div className="flex w-full flex-col gap-1">
-        <label htmlFor="video">Upload Video</label>
+      <div>
+        <label className="flex w-full flex-col gap-1">
+          <span>Category: </span>
+          <select
+            name={categoryFieldName}
+            data-testid={categoryFieldName}
+            className="w-full rounded px-4 py-2 text-teal-900 shadow-xl"
+          >
+            {categoryList.map((category) => (
+              <option key={category.name} value={category.name}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <div className="pt-2 pb-2">
         <input
           id="video"
           name={fileFieldName}
@@ -49,9 +58,11 @@ export const UploadVideoFormFields = ({
         name={thumbnailFieldName}
         data-testid={thumbnailFieldName}
       />
-      <button type="submit">
-        Upload Video
-      </button>
+      <div className="flex justify-center">
+        <button className="w-full rounded bg-teal-900 px-4 py-2 text-white shadow-xl">
+          Upload
+        </button>
+      </div>
     </section>
   );
 };
