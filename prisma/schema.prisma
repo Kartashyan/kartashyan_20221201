@@ -10,6 +10,7 @@ generator client {
 model Video {
   id           String       @id @default(cuid())
   title        String
+  videoUrl     String 
   thumbnail    String
   categoryName CategoryName
   category     Category     @relation(references: [name], fields: [categoryName])

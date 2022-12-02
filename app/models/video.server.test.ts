@@ -21,6 +21,7 @@ describe("video model", () => {
       id: "random id",
       title: "Brain training",
       thumbnail: "asdfadfsdf242jwqew",
+      videoUrl: "asdasdasdafadfsdf242jwqew",
       categoryName: "Education",
     };
     mockCtx.prisma.video.create.mockResolvedValue(videoItem);

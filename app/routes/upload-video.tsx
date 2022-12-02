@@ -22,16 +22,12 @@ export async function action({ request }: ActionArgs) {
   const videoUrl = `videos/${video?.name}`;
   const res = await createVideo({
     title: title.toString(),
+    videoUrl,
     thumbnail: thumbnail.toString(),
     //@ts-ignore
     categoryName,
   });
-  console.log("log fields", {
-    title,
-    categoryName,
-    video,
-    thumbnail,
-  });
+  console.log("db res", res);
   return redirect("/");
 }
 
