@@ -1,4 +1,6 @@
+import React, { useState } from "react";
 import type { Category } from "~/models/video.server";
+import { getVideoThumbnail } from "~/utils/gen-thumbnail.client";
 
 type Props = {
   categoryList: Category[];
@@ -15,6 +17,15 @@ export const UploadVideoFormFields = ({
   fileFieldName,
   thumbnailFieldName,
 }: Props) => {
+  const [thumbnail, setThumbnail] = useState<string>("");
+  const handleFileInputChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const files = event.target.files;
+    const file = files?.length ? files[0] : new Blob();
+    const fileUrl = URL.createObjectURL(file);
+    setThumbnail(await getVideoThumbnail(fileUrl));
+  };
   return (
     <section>
       <div>
@@ -48,13 +59,17 @@ export const UploadVideoFormFields = ({
         <input
           id="video"
           name={fileFieldName}
+          onChange={handleFileInputChange}
           data-testid={fileFieldName}
           type="file"
         />
       </div>
-      <img src="" alt="Video thumbnail" />
+      {thumbnail && (
+        <img src={thumbnail} width="320" height="240" alt="Video thumbnail" />
+      )}
       <input
         type="hidden"
+        value={thumbnail}
         name={thumbnailFieldName}
         data-testid={thumbnailFieldName}
       />
