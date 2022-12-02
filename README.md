@@ -1,6 +1,5 @@
 # Video Closet App
 
-
 Built with [Remix](https://remix.run).
 
 ## Quickstart

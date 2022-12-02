@@ -5,12 +5,8 @@ const prisma = new PrismaClient();
 async function seed() {
   await prisma.category.deleteMany({});
   await prisma.category.createMany({
-    data: [
-      { name: "Exercise" },
-      { name: "Education" },
-      { name: "Recipe" },
-    ],
-  })
+    data: [{ name: "Exercise" }, { name: "Education" }, { name: "Recipe" }],
+  });
   console.log(`Database has been seeded. 🌱`);
 }
 
