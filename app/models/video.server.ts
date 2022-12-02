@@ -1,6 +1,10 @@
-import { CategoryName, Video } from "@prisma/client";
-import { Context } from "~/db.context.server";
+import type { Category as CategoryType, CategoryName as CategoryNameType, Video as VideoType } from "@prisma/client";
+import type { Context } from "~/db.context.server";
 import { prisma } from "~/db.server";
+
+export type Video = VideoType;
+export type CategoryName = CategoryNameType;
+export type Category = CategoryType;
 
 type MakeOptional<Type, Key extends keyof Type> = Omit<Type, Key> &
   Partial<Pick<Type, Key>>;

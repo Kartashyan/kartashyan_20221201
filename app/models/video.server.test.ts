@@ -1,11 +1,12 @@
-import { Video } from "@prisma/client";
 import { mock } from "vitest-mock-extended";
-import { Context, createMockContext, MockContext } from "~/db.context.server";
+import { createMockContext } from "~/db.context.server";
+import type { Context, MockContext } from "~/db.context.server";
 import {
   createVideo,
   getAllVideos,
   getAllVideosByCategory,
 } from "./video.server";
+import type { Video } from "./video.server";
 
 let mockCtx: MockContext;
 let ctx: Context;

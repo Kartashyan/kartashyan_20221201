@@ -1,4 +1,4 @@
-import { Category } from "@prisma/client";
+import type { Category } from "~/models/video.server";
 
 type Props = {
   categoryList: Category[];
@@ -43,13 +43,13 @@ export const UploadVideoFormFields = ({
           type="file"
         />
       </div>
-      <img src="" role="show-thumbnail" alt="Video thumbnail" />
+      <img src="" alt="Video thumbnail" />
       <input
         type="hidden"
         name={thumbnailFieldName}
         data-testid={thumbnailFieldName}
       />
-      <button type="submit" role="submit">
+      <button type="submit">
         Upload Video
       </button>
     </section>

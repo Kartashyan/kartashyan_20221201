@@ -1,4 +1,5 @@
-import { json, LoaderArgs } from "@remix-run/server-runtime";
+import type { LoaderArgs } from "@remix-run/server-runtime";
+import { json } from "@remix-run/server-runtime";
 import { getAllVideos, getAllCategories } from "~/models/video.server";
 import { Link, useLoaderData } from "@remix-run/react";
 

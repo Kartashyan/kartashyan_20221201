@@ -1,10 +1,6 @@
 import { Form, useLoaderData } from "@remix-run/react";
-import {
-  ActionArgs,
-  json,
-  LoaderArgs,
-  redirect,
-} from "@remix-run/server-runtime";
+import { json, redirect } from "@remix-run/server-runtime";
+import type { ActionArgs, LoaderArgs } from "@remix-run/server-runtime";
 import { UploadVideoFormFields } from "~/components/UploadVideoFormFields";
 import { getAllCategories } from "~/models/video.server";
 
