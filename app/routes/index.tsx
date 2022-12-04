@@ -22,7 +22,7 @@ export default function Index() {
           <VideoItem
             key={video.id}
             title={video.title}
-            thumbnail={video.thumbnail}
+            lgTmbnail={video.lgTmbnail}
             videoUrl={video.videoUrl}
             categoryName={video.categoryName}
           />

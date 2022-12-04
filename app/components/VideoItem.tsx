@@ -1,13 +1,13 @@
 import type { Video } from "@prisma/client";
 import { useEffect, useState } from "react";
 
-type Props = Pick<Video, "title" | "categoryName" | "videoUrl" | "thumbnail">;
+type Props = Pick<Video, "title" | "categoryName" | "videoUrl" | "lgTmbnail">;
 
 export const VideoItem = ({
   videoUrl,
   title,
   categoryName,
-  thumbnail,
+  lgTmbnail,
 }: Props) => {
   const [open, setOpen] = useState(false);
 
@@ -27,7 +27,7 @@ export const VideoItem = ({
       <h4>{categoryName}</h4>
       <div className="relative h-40 w-40 overflow-hidden rounded">
         <img
-          src={thumbnail}
+          src={lgTmbnail}
           alt="Avatar"
           className="h-full w-full object-cover"
         />

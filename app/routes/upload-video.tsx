@@ -16,18 +16,21 @@ export async function action({ request }: ActionArgs) {
   const title = formData.get("title") || "";
   const category = formData.get("category") || "";
   const video = formData.get("video");
-  const thumbnail = formData.get("thumbnail") || "";
+  const smTmbnail = formData.get("smThumbnail") || "";
+  const mdTmbnail = formData.get("mdThumbnail") || "";
+  const lgTmbnail = formData.get("lgThumbnail") || "";
   const categoryName = category.toString() || "Exercise";
   //@ts-ignore
   const videoUrl = `videos/${video?.name}`;
   const res = await createVideo({
     title: title.toString(),
     videoUrl,
-    thumbnail: thumbnail.toString(),
+    smTmbnail,
+    mdTmbnail,
+    lgTmbnail,
     //@ts-ignore
     categoryName,
   });
-  console.log("db res", res);
   return redirect("/");
 }
 
@@ -55,7 +58,9 @@ export default function UploadVideoPage() {
                     titleFieldName="title"
                     categoryFieldName="category"
                     fileFieldName="video"
-                    thumbnailFieldName="thumbnail"
+                    smallThumbnailFieldName="smThumbnail"
+                    mediumThumbnailFieldName="mdThumbnail"
+                    largeThumbnailFieldName="lgThumbnail"
                   />
                 </Form>
               </div>

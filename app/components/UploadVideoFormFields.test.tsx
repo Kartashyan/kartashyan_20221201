@@ -7,6 +7,9 @@ describe("UploadVideo component", () => {
   const fileFieldName = "video";
   const titleFieldName = "title";
   const thumbnailFieldName = "thumbnail";
+  const smallThumbnailFieldName = "smThumbnail";
+  const mediumThumbnailFieldName = "mdThumbnail";
+  const largeThumbnailFieldName = "lgThumbnail";
 
   it("should have a title input field", () => {
     render(
@@ -15,7 +18,9 @@ describe("UploadVideo component", () => {
         titleFieldName={titleFieldName}
         categoryFieldName={categoryFieldName}
         fileFieldName={fileFieldName}
-        thumbnailFieldName={thumbnailFieldName}
+        smallThumbnailFieldName={smallThumbnailFieldName}
+        mediumThumbnailFieldName={mediumThumbnailFieldName}
+        largeThumbnailFieldName={largeThumbnailFieldName}
       />
     );
     expect(screen.getByTestId(titleFieldName)).toBeInTheDocument();
@@ -31,7 +36,9 @@ describe("UploadVideo component", () => {
         titleFieldName={titleFieldName}
         categoryFieldName={categoryFieldName}
         fileFieldName={fileFieldName}
-        thumbnailFieldName={thumbnailFieldName}
+        smallThumbnailFieldName={smallThumbnailFieldName}
+        mediumThumbnailFieldName={mediumThumbnailFieldName}
+        largeThumbnailFieldName={largeThumbnailFieldName}
       />
     );
     expect(screen.getByTestId(fileFieldName)).toBeInTheDocument();
@@ -44,7 +51,9 @@ describe("UploadVideo component", () => {
         titleFieldName={titleFieldName}
         categoryFieldName={categoryFieldName}
         fileFieldName={fileFieldName}
-        thumbnailFieldName={thumbnailFieldName}
+        smallThumbnailFieldName={smallThumbnailFieldName}
+        mediumThumbnailFieldName={mediumThumbnailFieldName}
+        largeThumbnailFieldName={largeThumbnailFieldName}
       />
     );
     expect(screen.getByTestId(categoryFieldName)).toBeInTheDocument();
@@ -57,7 +66,9 @@ describe("UploadVideo component", () => {
         titleFieldName={titleFieldName}
         categoryFieldName={categoryFieldName}
         fileFieldName={fileFieldName}
-        thumbnailFieldName={thumbnailFieldName}
+        smallThumbnailFieldName={smallThumbnailFieldName}
+        mediumThumbnailFieldName={mediumThumbnailFieldName}
+        largeThumbnailFieldName={largeThumbnailFieldName}
       />
     );
     expect(screen.getByTestId(thumbnailFieldName)).toBeInTheDocument();
@@ -70,7 +81,9 @@ describe("UploadVideo component", () => {
         titleFieldName={titleFieldName}
         categoryFieldName={categoryFieldName}
         fileFieldName={fileFieldName}
-        thumbnailFieldName={thumbnailFieldName}
+        smallThumbnailFieldName={smallThumbnailFieldName}
+        mediumThumbnailFieldName={mediumThumbnailFieldName}
+        largeThumbnailFieldName={largeThumbnailFieldName}
       />
     );
     expect(screen.getByRole("button")).toBeInTheDocument();

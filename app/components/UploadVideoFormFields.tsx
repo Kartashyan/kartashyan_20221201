@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import type { Category } from "~/models/video.server";
-import { getVideoThumbnail } from "~/utils/gen-thumbnail.client";
+import { getThumbnailSet, getVideoThumbnail, ThumbnailSet } from "~/utils/gen-thumbnail.client";
 
 type Props = {
   categoryList: Category[];
   titleFieldName: string;
   categoryFieldName: string;
   fileFieldName: string;
-  thumbnailFieldName: string;
+  smallThumbnailFieldName: string;
+  mediumThumbnailFieldName: string;
+  largeThumbnailFieldName: string;
 };
 
 export const UploadVideoFormFields = ({
@@ -15,16 +17,20 @@ export const UploadVideoFormFields = ({
   titleFieldName,
   categoryFieldName,
   fileFieldName,
-  thumbnailFieldName,
+  smallThumbnailFieldName,
+  mediumThumbnailFieldName,
+  largeThumbnailFieldName,
 }: Props) => {
-  const [thumbnail, setThumbnail] = useState<string>("");
+  const [thumbnailSet, setThumbnailSet] = useState<null | ThumbnailSet>(null);
+
   const handleFileInputChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const files = event.target.files;
     const file = files?.length ? files[0] : new Blob();
     const fileUrl = URL.createObjectURL(file);
-    setThumbnail(await getVideoThumbnail(fileUrl));
+    setThumbnailSet(await getThumbnailSet(fileUrl));
+
   };
   return (
     <section>
@@ -66,14 +72,40 @@ export const UploadVideoFormFields = ({
           type="file"
         />
       </div>
-      {thumbnail && (
-        <img src={thumbnail} width="320" height="240" alt="Video thumbnail" />
+      {thumbnailSet && (
+        <>
+          <img src={thumbnailSet.sm} width="64" height="64" alt="Video thumbnail" />
+          <img
+            src={thumbnailSet.md}
+            width="128"
+            height="128"
+            alt="Video thumbnail"
+          />
+          <img
+            src={thumbnailSet.lg}
+            width="256"
+            height="256"
+            alt="Video thumbnail"
+          />
+        </>
       )}
       <input
         type="hidden"
-        value={thumbnail}
-        name={thumbnailFieldName}
-        data-testid={thumbnailFieldName}
+        value={thumbnailSet?.sm}
+        name={smallThumbnailFieldName}
+        data-testid={smallThumbnailFieldName}
+      />
+      <input
+        type="hidden"
+        value={thumbnailSet?.md}
+        name={mediumThumbnailFieldName}
+        data-testid={mediumThumbnailFieldName}
+      />
+      <input
+        type="hidden"
+        value={thumbnailSet?.lg}
+        name={largeThumbnailFieldName}
+        data-testid={largeThumbnailFieldName}
       />
       <div className="flex justify-center">
         <button className="w-full rounded bg-teal-900 px-4 py-2 text-white shadow-xl">
