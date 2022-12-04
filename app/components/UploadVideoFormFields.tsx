@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import type { Category } from "~/models/video.server";
-import { getThumbnailSet, getVideoThumbnail, ThumbnailSet } from "~/utils/gen-thumbnail.client";
+import { getThumbnailSet, ThumbnailSet } from "~/utils/gen-thumbnail.client";
 
 type Props = {
   categoryList: Category[];
@@ -30,11 +30,10 @@ export const UploadVideoFormFields = ({
     const file = files?.length ? files[0] : new Blob();
     const fileUrl = URL.createObjectURL(file);
     setThumbnailSet(await getThumbnailSet(fileUrl));
-
   };
   return (
     <section>
-      <div>
+      <div className="mt-4">
         <label className="flex w-full flex-col gap-1">
           <span>Title: </span>
           <input
@@ -45,7 +44,7 @@ export const UploadVideoFormFields = ({
           />
         </label>
       </div>
-      <div>
+      <div className="mt-4">
         <label className="flex w-full flex-col gap-1">
           <span>Category: </span>
           <select
@@ -70,24 +69,17 @@ export const UploadVideoFormFields = ({
           accept=".mp4, .mov"
           data-testid={fileFieldName}
           type="file"
+          className="mt-4"
         />
       </div>
       {thumbnailSet && (
-        <>
-          <img src={thumbnailSet.sm} width="64" height="64" alt="Video thumbnail" />
-          <img
-            src={thumbnailSet.md}
-            width="128"
-            height="128"
-            alt="Video thumbnail"
-          />
-          <img
-            src={thumbnailSet.lg}
-            width="256"
-            height="256"
-            alt="Video thumbnail"
-          />
-        </>
+        <img
+          src={thumbnailSet.lg}
+          width="256"
+          height="256"
+          alt="Video thumbnail"
+          className="my-4"
+        />
       )}
       <input
         type="hidden"
@@ -108,7 +100,7 @@ export const UploadVideoFormFields = ({
         data-testid={largeThumbnailFieldName}
       />
       <div className="flex justify-center">
-        <button className="w-full rounded bg-teal-900 px-4 py-2 text-white shadow-xl">
+        <button className="mt-4 w-full rounded bg-teal-900 px-4 py-2 text-white shadow-xl">
           Upload
         </button>
       </div>

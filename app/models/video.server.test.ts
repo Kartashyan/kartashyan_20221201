@@ -20,7 +20,9 @@ describe("video model", () => {
     const videoItem: Video = {
       id: "random id",
       title: "Brain training",
-      thumbnail: "asdfadfsdf242jwqew",
+      smTmbnail: "asdfadfsdf242jwqew",
+      mdTmbnail: "asdfadfsdf242jwqew",
+      lgTmbnail: "asdfadfsdf242jwqew",
       videoUrl: "asdasdasdafadfsdf242jwqew",
       categoryName: "Education",
     };

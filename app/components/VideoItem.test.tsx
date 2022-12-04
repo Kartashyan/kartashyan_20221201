@@ -8,7 +8,7 @@ describe("VideoItem component", () => {
         title="qwerty"
         categoryName="Education"
         videoUrl="http://localhost:3000/qwerty"
-        thumbnail="asdasd"
+        lgTmbnail="asdasd"
       />
     );
     const element = screen.getByText("qwerty");
@@ -20,7 +20,7 @@ describe("VideoItem component", () => {
         title="qwerty"
         categoryName="Education"
         videoUrl="http://localhost:3000/qwerty"
-        thumbnail="asdasd"
+        lgTmbnail="asdasd"
       />
     );
     const element = screen.getByText("Education");

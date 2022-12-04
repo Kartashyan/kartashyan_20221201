@@ -7,6 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { VideoModalProvider } from "./hooks/useVideoModalContext";
 
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 
@@ -28,7 +29,9 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full">
-        <Outlet />
+        <VideoModalProvider>
+          <Outlet />
+        </VideoModalProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

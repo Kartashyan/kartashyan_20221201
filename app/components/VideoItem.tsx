@@ -1,5 +1,5 @@
 import type { Video } from "@prisma/client";
-import { useEffect, useState } from "react";
+import { useVideoModalContext } from "~/hooks/useVideoModalContext";
 
 type Props = Pick<Video, "title" | "categoryName" | "videoUrl" | "lgTmbnail">;
 
@@ -9,40 +9,35 @@ export const VideoItem = ({
   categoryName,
   lgTmbnail,
 }: Props) => {
-  const [open, setOpen] = useState(false);
+  const { setSource } = useVideoModalContext();
 
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
-      setOpen(false);
-    }
+  const hanldeClick = () => {
+    setSource(videoUrl);
   };
 
-  useEffect(() => {
-    window.document.addEventListener("keydown", handleKeyDown);
-  });
-
   return (
-    <div className="flex flex-col">
-      <h2>{title}</h2>
-      <h4>{categoryName}</h4>
-      <div className="relative h-40 w-40 overflow-hidden rounded">
+    <li className="relative">
+      <p className="pointer-events-none mb-2 block truncate text-sm font-medium text-gray-900">
+        {categoryName}
+      </p>
+
+      <div className="group relative block w-full overflow-hidden rounded-lg">
         <img
           src={lgTmbnail}
-          alt="Avatar"
-          className="h-full w-full object-cover"
+          alt=""
+          className="pointer-events-none object-cover group-hover:opacity-75"
         />
+        <button type="button" className="absolute inset-0 focus:outline-none">
+          <span className="sr-only">{title}</span>
+        </button>
+
         <div
-          onClick={() => setOpen(true)}
-          className="absolute inset-x-0 bottom-0 flex h-full w-full cursor-pointer items-center justify-center bg-slate-400 font-extrabold leading-4 text-black opacity-10 hover:opacity-90"
+          onClick={hanldeClick}
+          className="absolute inset-0  flex h-full w-full cursor-pointer items-center justify-center bg-slate-400/20 font-extrabold leading-4 text-black opacity-0 transition-opacity hover:opacity-100"
         >
-          Play
+          {title}
         </div>
       </div>
-      {open && (
-        <div className="absolute inset-x-0 inset-y-0 z-10 flex cursor-pointer items-center justify-center">
-          <video src={videoUrl} width={400} height={320} controls autoPlay />
-        </div>
-      )}
-    </div>
+    </li>
   );
 };

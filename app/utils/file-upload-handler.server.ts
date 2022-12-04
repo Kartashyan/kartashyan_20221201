@@ -6,7 +6,6 @@ import { createMemoryUploadHandler } from "@remix-run/server-runtime/dist/upload
 export const fileUploadToDiskHandler = createFileUploadHandler({
   maxPartSize: 2e8, //200mb
   directory: "public/videos",
-  file: ({ filename }) => filename,
 });
 
 export const uploadHandler: UploadHandler = composeUploadHandlers(

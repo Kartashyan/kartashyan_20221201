@@ -2,7 +2,7 @@ export type ThumbnailSet = {
   sm: string;
   md: string;
   lg: string;
-}
+};
 
 const SQUARE = "SQUARE";
 const LANDSCAPE = "LANDSCAPE";
@@ -43,7 +43,7 @@ export async function getVideoThumbnail(
   });
 
   const orientation = getOrientation(video.videoWidth, video.videoHeight);
-  
+
   const smallSideSize = Math.min(video.videoWidth, video.videoHeight);
 
   switch (orientation) {
@@ -51,23 +51,46 @@ export async function getVideoThumbnail(
       canvas.getContext("2d")?.drawImage(video, 0, 0, width, height);
       break;
     case LANDSCAPE:
-      canvas.getContext("2d")?.drawImage(video, (video.videoWidth - smallSideSize) / 2, 0, smallSideSize, smallSideSize, 0, 0, width, height);
+      canvas
+        .getContext("2d")
+        ?.drawImage(
+          video,
+          (video.videoWidth - smallSideSize) / 2,
+          0,
+          smallSideSize,
+          smallSideSize,
+          0,
+          0,
+          width,
+          height
+        );
       break;
     case PORTRAIT:
-      canvas.getContext("2d")?.drawImage(video, 0, (video.videoHeight - smallSideSize) / 2, smallSideSize, smallSideSize, 0, 0, width, height);
+      canvas
+        .getContext("2d")
+        ?.drawImage(
+          video,
+          0,
+          (video.videoHeight - smallSideSize) / 2,
+          smallSideSize,
+          smallSideSize,
+          0,
+          0,
+          width,
+          height
+        );
       break;
-
   }
   const imageUrl = canvas.toDataURL("image/png");
   return imageUrl;
 }
 
 function getOrientation(width: number, height: number) {
-  if(width > height) {
-    return LANDSCAPE
-  } else if(width < height) {
-    return PORTRAIT
+  if (width > height) {
+    return LANDSCAPE;
+  } else if (width < height) {
+    return PORTRAIT;
   } else {
-    return SQUARE
+    return SQUARE;
   }
 }
